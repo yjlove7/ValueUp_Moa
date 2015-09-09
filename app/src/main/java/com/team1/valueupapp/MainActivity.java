@@ -19,7 +19,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -201,26 +200,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(ParseUser.getCurrentUser()!=null) {
-                    if(mem_count>0) {
-                        ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery("ValueUp_team");
-                        parseQuery.whereEqualTo("member", ParseUser.getCurrentUser().getString("name"));
-                        parseQuery.whereEqualTo("ismade", true);
-                        parseQuery.findInBackground(new FindCallback<ParseObject>() {
-                            @Override
-                            public void done(List<ParseObject> list, ParseException e) {
-                                final Intent intent = new Intent(MainActivity.this, TeamDetailActivity.class);
-                                Log.d("dfdfdf",list.get(0).getString("admin_member"));
-                                intent.putExtra("name", list.get(0).getString("admin_member"));
-                                intent.putExtra("title", list.get(0).getString("idea"));
-                                intent.putExtra("detail", list.get(0).getString("idea_info"));
-                                startActivity(intent);
-                            }
-                        });
-                    }
-                    else if(mem_count==0){
-                        Intent intent = new Intent(MainActivity.this, TeamActivity.class);
-                        startActivity(intent);
-                    }
+//                    if(mem_count>0) {
+//                        ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery("ValueUp_team");
+//                        parseQuery.whereEqualTo("member", ParseUser.getCurrentUser().getString("name"));
+//                        parseQuery.whereEqualTo("ismade", true);
+//                        parseQuery.findInBackground(new FindCallback<ParseObject>() {
+//                            @Override
+//                            public void done(List<ParseObject> list, ParseException e) {
+//                                final Intent intent = new Intent(MainActivity.this, TeamDetailActivity.class);
+//                                Log.d("dfdfdf",list.get(0).getString("admin_member"));
+//                                intent.putExtra("name", list.get(0).getString("admin_member"));
+//                                intent.putExtra("title", list.get(0).getString("idea"));
+//                                intent.putExtra("detail", list.get(0).getString("idea_info"));
+//                                startActivity(intent);
+//                            }
+//                        });
+//                    }
+//                    else if(mem_count==0){
+//                        Intent intent = new Intent(MainActivity.this, TeamActivity.class);
+//                        startActivity(intent);
+//                    }
+
+                    Intent intent = new Intent(MainActivity.this, MemberActivity.class);
+                    startActivity(intent);
+
                 }
 
                 else{
@@ -253,20 +256,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setMain() {
-        name.setText(ParseUser.getCurrentUser().getString("name"));
-        switch (ParseUser.getCurrentUser().getString("job")) {
-            case "plan":
-                job.setText("기획자");
-                break;
-            case "dev":
-                job.setText("개발자");
-                break;
-            case "dis":
-                job.setText("디자이너");
-                break;
-        }
+//        name.setText(ParseUser.getCurrentUser().getString("name"));
+//        switch (ParseUser.getCurrentUser().getString("job")) {
+//            case "plan":
+//                job.setText("기획자");
+//                break;
+//            case "dev":
+//                job.setText("개발자");
+//                break;
+//            case "dis":
+//                job.setText("디자이너");
+//                break;
+//        }
 
-        final ParseRelation<ParseUser> relation = ParseUser.getCurrentUser().getRelation("my_pick");
+        final ParseRelation<ParseUser> relation = ParseUser.getCurrentUser().getRelation("pick");
         relation.getQuery().findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> list, ParseException e) {
@@ -279,6 +282,8 @@ public class MainActivity extends AppCompatActivity {
                 pick_int.setText(""+size);  //ListFragment와 같음.. 수정해야함
             }
         });
+
+
 //        pick_int.setText(""+size);  //ListFragment와 같음.. 수정해야함
 
         ParseQuery<ParseObject> picked_query = ParseQuery.getQuery("Picked");
