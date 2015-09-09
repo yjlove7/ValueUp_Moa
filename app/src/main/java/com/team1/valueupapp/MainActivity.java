@@ -17,8 +17,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -69,15 +67,15 @@ public class MainActivity extends AppCompatActivity {
     int CAMERA_REQUEST = 1000;
     int SELECT_FILE = 2000;
 
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+//    RecyclerView recyclerView;
+//    RecyclerView.LayoutManager layoutManager;
     List<MainListitem> items;
 
     int cur_fragment_int = 0;
 
     TextView pick_int = null;
     TextView picked_int = null;
-    TextView current_int = null;
+//    TextView current_int = null;
 
     LinearLayout team = null;
     TextView name = null;
@@ -110,14 +108,14 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
 
         navigationView = (NavigationView) findViewById(R.id.navigationView);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+//        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
 
-        layoutManager = new LinearLayoutManager(getApplicationContext());
+//        layoutManager = new LinearLayoutManager(getApplicationContext());
         FrameLayout pick = (FrameLayout) findViewById(R.id.pick);
         FrameLayout picked = (FrameLayout) findViewById(R.id.picked);
         pick_int = (TextView) findViewById(R.id.pick_int);
         picked_int = (TextView) findViewById(R.id.picked_int);
-        current_int = (TextView) findViewById(R.id.current_int);
+//        current_int = (TextView) findViewById(R.id.current_int);
         team = (LinearLayout) findViewById(R.id.team);
         name = (TextView) findViewById(R.id.name);
         job = (TextView) findViewById(R.id.job);
@@ -150,8 +148,8 @@ public class MainActivity extends AppCompatActivity {
         if (ParseUser.getCurrentUser() != null)
             setMain();
 
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(layoutManager);
         makeDrawerHeader();
 
         profile_drawer.setOnClickListener(new View.OnClickListener() {
@@ -328,7 +326,7 @@ public class MainActivity extends AppCompatActivity {
                     mem_count=list.size();
                     List<String> member = list.get(0).getList("member");
 
-                    current_int.setText("" + member.size());
+//                    current_int.setText("" + member.size());
 
 
                     for (int i = 0; i < member.size(); i++) {
@@ -338,13 +336,13 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 MainRecyclerAdapter adapter = new MainRecyclerAdapter(getApplicationContext(), items, R.layout.item_mainlist_name);
-                recyclerView.setAdapter(adapter);
+//                recyclerView.setAdapter(adapter);
             }
 
 
         });
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(layoutManager);
     }
 
     private boolean changeDrawerMenu(MenuItem menuItem) {
