@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
 //                        startActivity(intent);
 //                    }
 
-                    Intent intent = new Intent(MainActivity.this, MemberActivity.class);
+                    Intent intent = new Intent(MainActivity.this,MemberActivity.class);
                     startActivity(intent);
 
                 }
